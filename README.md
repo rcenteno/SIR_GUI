@@ -2,6 +2,9 @@
 Python GUI to display atmospheric models and Stokes profiles from the SIR spectral line inversion code.
 This is a Python "translation" of the IDL visualization package graphics2.pro that comes with the SIR distribution.
 
+Running the GUI:
+> python sirgui.py
+
 Author:
 Rebecca Centeno,
 High Altitude Observatory (NCAR)
@@ -19,5 +22,3 @@ Third party modules needed:
 - numpy
 - matplotlib
 
-Running the GUI:
-python sirgui.py
