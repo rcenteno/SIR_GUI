@@ -15,6 +15,13 @@ The reading routines are used by the visualization GUI: SirGUI
 
 >> tau, temp, Pe, vmic, B, vlos, gamma, phi, vmac, ff, stray, z, rho, Pg  = readmod(filename)
 
+>>  writepro(filename, line_ind, wvlen, StkI, StkQ, StkU, StkV)
+
+>> writemod(filename, tau, temp, Pe, vmic, B, vlos, gamma, phi, vmac, ff, stray, z=z, rho=rho, Pg = Pg)
+
+******* Changes:
+
+10-01-2018: Change in readpro so that line index is not assumed to be an integer.
 
 """
 
@@ -38,9 +45,8 @@ def readpro(filename):
     StkV = []
     
     for line in f:
-        
         data = line.split()
-        line_ind.append(int(data[0]))
+        line_ind.append(float(data[0]))
         wvlen.append(float(data[1]))
         StkI.append(float(data[2]))
         StkQ.append(float(data[3]))
