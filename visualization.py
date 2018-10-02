@@ -47,6 +47,7 @@ class VisualizationCanvas(Toplevel):
             try: # Read Stokes profiles files
                 line_ind, wvlen, StkI, StkQ, StkU, StkV = \
                   st.readpro(config.file_path+config.legend_names[jj]+'.per')
+                print('---------------- Reading PER file ----------------')  
                 Stokes.append([StkI, StkQ, StkU, StkV])              
             except:
                 print('No .per file for ', config.file_path+config.legend_names[jj])
@@ -81,8 +82,12 @@ class VisualizationCanvas(Toplevel):
         config.lower_limits = []
         config.upper_limits = []
         for jj in range(0,11):
-            datamin = model_array[:,jj].min()
-            datamax = model_array[:,jj].max()
+            if len(model_array) == 0:
+                datamin = 0.0
+                datamax = 0.0
+            else:
+                datamin = model_array[:,jj].min()*0.9
+                datamax = model_array[:,jj].max()*1.1
             if datamin == datamax:
                 datamax = datamin+1
                 datamin -= 1
