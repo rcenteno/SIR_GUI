@@ -47,7 +47,6 @@ class VisualizationCanvas(Toplevel):
             try: # Read Stokes profiles files
                 line_ind, wvlen, StkI, StkQ, StkU, StkV = \
                   st.readpro(config.file_path+config.legend_names[jj]+'.per')
-                print('---------------- Reading PER file ----------------')  
                 Stokes.append([StkI, StkQ, StkU, StkV])              
             except:
                 print('No .per file for ', config.file_path+config.legend_names[jj])
@@ -82,6 +81,8 @@ class VisualizationCanvas(Toplevel):
         config.lower_limits = []
         config.upper_limits = []
         for jj in range(0,11):
+            #datamin = model_array[:,jj].min()
+            #datamax = model_array[:,jj].max()
             if len(model_array) == 0:
                 datamin = 0.0
                 datamax = 0.0
@@ -91,8 +92,8 @@ class VisualizationCanvas(Toplevel):
             if datamin == datamax:
                 datamax = datamin+1
                 datamin -= 1
-            config.lower_limits.append(datamin)
-            config.upper_limits.append(datamax)
+            config.lower_limits.append(datamin)*0.9
+            config.upper_limits.append(datamax)*1.1
             
         # Set the toggle to z again, should the user have requested z-scale but not
         # all models have z columns
@@ -242,10 +243,13 @@ class VisualizationCanvas(Toplevel):
                           labelspacing=0.1,fontsize=8 )
 
         canvas = FigureCanvasTkAgg(sir_fig, self)
+
         canvas.draw()
         canvas.get_tk_widget().pack(side=BOTTOM, fill=BOTH, \
                                     expand=True)
-        toolbar = NavigationToolbar2TkAgg(canvas, self)
+        #toolbar = NavigationToolbar2TkAgg(canvas, self)
+        toolbar = NavigationToolbar2Tk(canvas, self)
+
         toolbar.update()
         canvas._tkcanvas.pack(side=TOP, fill=BOTH, expand=True)
     
