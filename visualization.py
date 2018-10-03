@@ -92,8 +92,8 @@ class VisualizationCanvas(Toplevel):
             if datamin == datamax:
                 datamax = datamin+1
                 datamin -= 1
-            config.lower_limits.append(datamin)*0.9
-            config.upper_limits.append(datamax)*1.1
+            config.lower_limits.append(datamin)
+            config.upper_limits.append(datamax)
             
         # Set the toggle to z again, should the user have requested z-scale but not
         # all models have z columns
